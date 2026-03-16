@@ -1,0 +1,132 @@
+body {
+  margin: 0;
+  background: #0d1117;
+  color: #e6edf3;
+  font: 400 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+.popup {
+  width: 340px;
+  padding: 18px;
+}
+
+.popup__header h1 {
+  margin: 0 0 8px;
+  font-size: 22px;
+  line-height: 1.1;
+}
+
+.popup__eyebrow {
+  margin: 0 0 6px;
+  color: #8b949e;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.popup__copy {
+  margin: 0 0 16px;
+  color: #8b949e;
+}
+
+.popup__form {
+  display: grid;
+  gap: 12px;
+}
+
+.popup__field {
+  display: grid;
+  gap: 8px;
+}
+
+.popup__field span {
+  font-weight: 600;
+}
+
+.popup__field input {
+  appearance: none;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  background: #010409;
+  color: #e6edf3;
+  padding: 10px 12px;
+}
+
+.popup__button {
+  appearance: none;
+  width: 100%;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  background: #21262d;
+  color: #e6edf3;
+  padding: 10px 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.popup__tokens {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid #30363d;
+}
+
+.popup__tokens-head h2 {
+  margin: 0 0 10px;
+  font-size: 14px;
+}
+
+.popup__token-list {
+  display: grid;
+  gap: 8px;
+}
+
+.popup__token-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  background: #010409;
+}
+
+.popup__token-copy {
+  min-width: 0;
+}
+
+.popup__token-name {
+  font-weight: 600;
+  color: #e6edf3;
+}
+
+.popup__token-mask,
+.popup__empty {
+  color: #8b949e;
+  font-size: 12px;
+}
+
+.popup__empty {
+  margin: 0;
+}
+
+.popup__token-delete {
+  appearance: none;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  background: #21262d;
+  color: #e6edf3;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.popup__status {
+  min-height: 20px;
+  margin: 12px 0 0;
+  color: #8b949e;
+}

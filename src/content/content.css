@@ -1,0 +1,298 @@
+.authorizeButton {
+  cursor: pointer;
+}
+
+#stc-root {
+  width: 100%;
+}
+
+#commits-outside-container {
+  width: 100%;
+}
+
+.stc-loading,
+.stc-error {
+  padding: 24px 0;
+}
+
+.stc-panel {
+  display: grid;
+  gap: 20px;
+  width: 100%;
+  padding: 16px 0 32px;
+}
+
+.stc-shell {
+  border: none;
+  border-radius: 16px;
+  background: transparent;
+  box-shadow: 0 24px 48px rgba(1, 4, 9, 0.22);
+}
+
+.stc-shell__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 22px 0;
+}
+
+.stc-shell__eyebrow {
+  margin: 0 0 6px;
+  color: var(--fgColor-muted, #8b949e);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.stc-shell__title {
+  margin: 0;
+  color: var(--fgColor-default, #e6edf3);
+  font-size: 22px;
+  line-height: 1.1;
+}
+
+.stc-shell__summary {
+  margin: 2px 0 0;
+  color: var(--fgColor-muted, #8b949e);
+  font-size: 12px;
+  text-align: right;
+}
+
+.stc-graph-scroll {
+  overflow-x: auto;
+  padding: 12px 22px 8px;
+}
+
+.stc-branch-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 14px 22px 0;
+}
+
+.stc-branch-label {
+  appearance: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+  max-width: 240px;
+  margin: 0;
+  padding: 6px 10px;
+  border: 1px solid var(--borderColor-default, #30363d);
+  border-radius: 6px;
+  background: var(--button-default-bgColor-rest, #21262d);
+  color: var(--fgColor-default, #e6edf3);
+  cursor: pointer;
+  text-align: left;
+  transition: opacity 120ms ease, border-color 120ms ease, color 120ms ease, background-color 120ms ease;
+}
+
+.stc-branch-label__name {
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stc-branch-label__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.stc-branch-badge {
+  border: 1px solid rgba(240, 246, 252, 0.12);
+  border-radius: 999px;
+  padding: 2px 7px;
+  color: var(--fgColor-muted, #8b949e);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.stc-branch-label__icon {
+  flex: none;
+  overflow: visible;
+}
+
+.stc-graph {
+  overflow: visible;
+  display: block;
+}
+
+.stc-graph-row-hit {
+  fill: transparent;
+}
+
+.stc-graph-path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.stc-graph-node {
+  stroke: #0d1117;
+  stroke-width: 2;
+  cursor: pointer;
+  transition: opacity 120ms ease, stroke 120ms ease, stroke-width 120ms ease;
+}
+
+.stc-graph-node-head {
+  stroke: #f0f6fc;
+  stroke-width: 3;
+}
+
+.stc-graph-label,
+.stc-graph-node {
+  vector-effect: non-scaling-stroke;
+}
+
+.stc-graph-hint {
+  margin: 0;
+  padding: 0 22px 18px;
+  color: var(--fgColor-muted, #8b949e);
+  font-size: 12px;
+}
+
+.stc-shell--list {
+  overflow: hidden;
+}
+
+.stc-commit-list {
+  margin: 0;
+  padding: 12px 0 0;
+  list-style: none;
+}
+
+.stc-commit-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 16px 12px;
+  border: 1px solid rgba(240, 246, 252, 0.08);
+  border-radius: 14px;
+  background: rgba(13, 17, 23, 0.86);
+  transition: border-color 120ms ease, transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
+}
+
+.stc-commit-item__main {
+  min-width: 0;
+  flex: 1;
+}
+
+.stc-commit-item__message {
+  margin: 0 0 10px;
+}
+
+.stc-commit-item__meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.stc-commit-item__author {
+  min-width: 0;
+}
+
+.stc-commit-item__branches {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+
+.stc-branch-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(240, 246, 252, 0.12);
+  border-radius: 4px;
+  padding: 3px 6px;
+  background: var(--button-default-bgColor-rest, #21262d);
+  color: var(--fgColor-default, #e6edf3);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: border-color 120ms ease, color 120ms ease, background-color 120ms ease, opacity 120ms ease;
+}
+
+.stc-branch-chip__icon {
+  flex: none;
+}
+
+.stc-commit-item.is-active {
+  border-color: rgba(88, 166, 255, 0.55);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 32px rgba(56, 139, 253, 0.16);
+}
+
+.stc-commit-item.is-dimmed {
+  opacity: 0.45;
+}
+
+.stc-branch-label.is-active {
+  border-color: rgba(88, 166, 255, 0.45);
+  background: var(--button-default-bgColor-hover, #30363d);
+}
+
+.stc-branch-label.is-dimmed {
+  opacity: 0.3;
+}
+
+.stc-branch-label.is-hidden,
+.stc-graph-edge.is-hidden {
+  display: none;
+}
+
+.stc-graph-node.is-active {
+  stroke: #f0f6fc;
+  stroke-width: 4;
+}
+
+.stc-graph-node.is-hidden {
+  display: none;
+}
+
+.stc-graph-edge.is-dimmed,
+.stc-graph-node.is-dimmed {
+  opacity: 0.18;
+}
+
+.stc-branch-chip.is-active {
+  border-color: rgba(88, 166, 255, 0.45);
+  background: rgba(56, 139, 253, 0.1);
+  color: var(--fgColor-default, #e6edf3);
+}
+
+.stc-branch-chip.is-dimmed {
+  opacity: 0.35;
+}
+
+@media (max-width: 1012px) {
+  .stc-shell__head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .stc-shell__summary {
+    text-align: left;
+  }
+
+  .stc-commit-item {
+    flex-direction: column;
+  }
+
+  .stc-commit-item__branches {
+    margin-left: 0;
+  }
+}

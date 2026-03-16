@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>See thy commits</title>
+    <link rel="stylesheet" href="./popup.css" />
+  </head>
+  <body>
+    <main class="popup">
+      <header class="popup__header">
+        <p class="popup__eyebrow">GitHub access</p>
+        <h1>See thy commits</h1>
+        <p class="popup__copy">
+          Save named GitHub personal access tokens. The extension will try public access first, then each saved token until one works.
+        </p>
+      </header>
+
+      <div class="popup__form">
+        <label class="popup__field">
+          <span>Token name</span>
+          <input id="token-name" type="text" placeholder="Acme org PAT" autocomplete="off" />
+        </label>
+
+        <label class="popup__field">
+          <span>Personal access token</span>
+          <input id="token" type="password" placeholder="ghp_xxx" autocomplete="off" />
+        </label>
+
+        <button id="save" class="popup__button" type="button">Save token</button>
+      </div>
+
+      <section class="popup__tokens">
+        <div class="popup__tokens-head">
+          <h2>Saved tokens</h2>
+        </div>
+        <div id="token-list" class="popup__token-list"></div>
+      </section>
+
+      <p id="status" class="popup__status" aria-live="polite"></p>
+    </main>
+    <script type="module" src="./popup.js"></script>
+  </body>
+  </html>
