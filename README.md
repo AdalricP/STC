@@ -1,6 +1,6 @@
 # See thy commits
 
-Quick extension to show an interactive commit graph.
+Quick chrome extension to show an interactive commit graph.
 
 <img width="3336" height="1700" alt="image" src="https://github.com/user-attachments/assets/1d972714-3f3f-4b97-8a0e-f2a6e8dd2249" />
 
