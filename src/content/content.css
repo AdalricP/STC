@@ -4,10 +4,12 @@
 
 #stc-root {
   width: 100%;
+  min-width: 0;
 }
 
 #commits-outside-container {
   width: 100%;
+  min-width: 0;
 }
 
 .stc-loading,
@@ -19,14 +21,21 @@
   display: grid;
   gap: 20px;
   width: 100%;
+  min-width: 0;
   padding: 16px 0 32px;
 }
 
 .stc-shell {
+  min-width: 0;
+  max-width: 100%;
   border: none;
   border-radius: 16px;
   background: transparent;
   box-shadow: 0 24px 48px rgba(1, 4, 9, 0.22);
+}
+
+.stc-shell--graph {
+  overflow: hidden;
 }
 
 .stc-shell__head {
@@ -61,8 +70,22 @@
 }
 
 .stc-graph-scroll {
-  overflow-x: auto;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  max-height: 420px;
+  overflow: auto;
   padding: 12px 22px 8px;
+  overscroll-behavior: none;
+  scrollbar-gutter: stable both-edges;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.stc-graph-scroll.is-dragging {
+  cursor: grabbing;
 }
 
 .stc-branch-labels {
@@ -124,6 +147,7 @@
 .stc-graph {
   overflow: visible;
   display: block;
+  max-width: none;
 }
 
 .stc-graph-row-hit {

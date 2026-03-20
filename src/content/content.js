@@ -23,6 +23,7 @@ function bootstrap() {
   });
 
   ensureCommitsTab();
+  watchForRepoNav();
 }
 
 function ensureCommitsTab() {
@@ -55,8 +56,7 @@ function ensureCommitsTab() {
     }
   });
 
-  const insertBefore = navList.children[1] || null;
-  navList.insertBefore(newItem, insertBefore);
+  navList.appendChild(newItem);
 }
 
 function findRepoNavList() {
@@ -183,6 +183,7 @@ async function renderFromTemplates(root, payload) {
   outside.addEventListener("mouseleave", scheduleHoverReset);
 
   renderGraph(view);
+  attachGraphScrollBehavior(view);
   renderCommitList(view);
   syncView(view);
 }
@@ -206,6 +207,7 @@ function buildViewState(payload, outside, itemHtml) {
     branches,
     graph,
     graphSvg: outside.querySelector("#graphSvg"),
+    graphScroll: outside.querySelector(".stc-graph-scroll"),
     branchLabels: outside.querySelector("#branchLabels"),
     commitsContainer: outside.querySelector("#commits-container"),
     listSummary: outside.querySelector("#listSummary"),
@@ -466,7 +468,7 @@ function renderGraph(view) {
         view,
         svg,
         drawCurveHorizontal(commit.cx, commit.cy, nextX, nextY),
-        lineColors[parent.lineIndex],
+        commit.color,
         new Set([...(view.graph.lineBranches.get(parent.lineIndex) || []), ...commit.branches, ...parent.branches])
       );
     }
@@ -632,6 +634,88 @@ function appendGraphEdge(view, svg, pathData, color, branches, dotted = false) {
 
   svg.appendChild(path);
   view.graphEdges.push(path);
+}
+
+function attachGraphScrollBehavior(view) {
+  const graphScroll = view.graphScroll;
+  if (!graphScroll || graphScroll.dataset.stcScrollBound === "true") {
+    return;
+  }
+
+  graphScroll.dataset.stcScrollBound = "true";
+  let pointerState = null;
+
+  graphScroll.addEventListener("pointerdown", (event) => {
+    if (event.button !== 0) {
+      return;
+    }
+
+    pointerState = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      scrollLeft: graphScroll.scrollLeft,
+      scrollTop: graphScroll.scrollTop
+    };
+
+    graphScroll.classList.add("is-dragging");
+    graphScroll.setPointerCapture(event.pointerId);
+    event.preventDefault();
+  });
+
+  graphScroll.addEventListener("pointermove", (event) => {
+    if (!pointerState || event.pointerId !== pointerState.pointerId) {
+      return;
+    }
+
+    graphScroll.scrollLeft = pointerState.scrollLeft - (event.clientX - pointerState.startX);
+    graphScroll.scrollTop = pointerState.scrollTop - (event.clientY - pointerState.startY);
+    event.preventDefault();
+  });
+
+  const clearPointerState = (event) => {
+    if (!pointerState || (event && event.pointerId !== pointerState.pointerId)) {
+      return;
+    }
+
+    if (event && graphScroll.hasPointerCapture(event.pointerId)) {
+      graphScroll.releasePointerCapture(event.pointerId);
+    }
+
+    graphScroll.classList.remove("is-dragging");
+    pointerState = null;
+  };
+
+  graphScroll.addEventListener("pointerup", clearPointerState);
+  graphScroll.addEventListener("pointercancel", clearPointerState);
+
+  graphScroll.addEventListener(
+    "wheel",
+    (event) => {
+      const maxScrollLeft = graphScroll.scrollWidth - graphScroll.clientWidth;
+      const maxScrollTop = graphScroll.scrollHeight - graphScroll.clientHeight;
+      const preferredHorizontalDelta = event.deltaX !== 0 ? event.deltaX : event.deltaY;
+      const nextScrollLeft = clamp(graphScroll.scrollLeft + preferredHorizontalDelta, 0, maxScrollLeft);
+      const nextScrollTop = clamp(graphScroll.scrollTop + event.deltaY, 0, maxScrollTop);
+
+      if (maxScrollLeft > 0 || maxScrollTop > 0) {
+        if (maxScrollLeft > 0) {
+          graphScroll.scrollLeft = nextScrollLeft;
+        }
+
+        if (maxScrollTop > 0) {
+          graphScroll.scrollTop = nextScrollTop;
+        }
+
+        event.preventDefault();
+      }
+    },
+    { passive: false }
+  );
+}
+
+function clamp(value, min, max) {
+  return Math.min(max, Math.max(min, value));
 }
 
 function serializeBranches(branches) {
@@ -933,6 +1017,18 @@ function observeLocationChanges(onChange) {
       onChange();
     }
   });
+  observer.observe(document.documentElement, { childList: true, subtree: true });
+}
+
+function watchForRepoNav() {
+  const observer = new MutationObserver(() => {
+    if (!getRepoInfo()) {
+      return;
+    }
+
+    ensureCommitsTab();
+  });
+
   observer.observe(document.documentElement, { childList: true, subtree: true });
 }
 
